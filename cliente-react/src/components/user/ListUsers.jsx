@@ -3,11 +3,9 @@ import axios from 'axios'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
-import {AiFillDelete} from 'react-icons/all'
 import { CreateUser } from "./CreateUser";
-import { UpdateUser } from "./UpdateUser";
+
+import { TableComponent } from "../util/Table";
 
 const URI = 'http://localhost:5000/users/'
 
@@ -19,17 +17,16 @@ export const ListUsers = () => {
     getUsers()
   }, [])
 
-
   const getUsers = async () => {
     const res = await axios.get(URI)
     console.log(res.data);
     setUsers(res.data)
   }
 
-  const deleteUser = async (id) => {
-    axios.delete(`${URI}${id}`)
-    getUsers()
-  }
+  // const deleteUser = async (id) => {
+  //   axios.delete(`${URI}${id}`)
+  //   getUsers()
+  // }
 
   return (
     <Container>
@@ -39,33 +36,7 @@ export const ListUsers = () => {
       </div>
       <Row>
         <Col>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Usuario</th>
-                <th>Correo</th>
-                <th>Rol</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                users.map((user) => {
-                  return (
-                    <tr key={user.id}>
-                      <td>{user.username}</td>
-                      <td>{user.email}</td>
-                      <td>{user.rol}</td>
-                      <td>
-                          <UpdateUser/>
-                          <Button style={{marginLeft:'15px'}} onClick={()=> deleteUser(user.id)} variant="danger"><AiFillDelete/></Button>
-                      </td>
-                    </tr>
-                  )
-                })
-              }
-            </tbody>
-          </Table>
+            <TableComponent dataSource={users}/>
         </Col>
       </Row>
     </Container>

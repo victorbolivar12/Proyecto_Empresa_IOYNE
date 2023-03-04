@@ -3,10 +3,21 @@ import logo from './../../assets/logoo.png'
 import { MdDashboard, FaUsers, IoIosCard, AiTwotoneSetting, MdOutlineSupervisedUserCircle, FaReadme, RiLogoutBoxFill } from 'react-icons/all'
 import { ListUsers } from '../../components/user/ListUsers'
 
+
 export const Dashboard = () => {
 
   let options = { day: 'numeric', month: 'long', year: 'numeric' }
   let CurrentDate = new Date().toLocaleDateString('es-ES', options);
+
+  // const menuLinks = [
+  //   {title: 'Dashboard', path: '/', icon: MdDashboard },
+  //   {title: 'Usuarios', path: '/usuarios', icon: FaUsers },
+  //   {title: 'Productos', path: '/productos', icon: IoIosCard },
+  //   {title: 'Cotizaciones', path: '/cotizaciones', icon: AiTwotoneSetting },
+  //   {title: 'Clientes', path: '/clientes', icon: MdOutlineSupervisedUserCircle },
+  //   {title: 'Configuracion', path: '/configuracion', icon: FaReadme },
+  //   {title: 'Cerrar Seccion', path: '/logout', icon: RiLogoutBoxFill }
+  // ]
 
   return (
 

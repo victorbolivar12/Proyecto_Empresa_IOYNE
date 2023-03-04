@@ -17,19 +17,19 @@ export const Login = () => {
       <Card className="w-25 mx-auto mt-5 shadow p-3 mb-5 bg-body rounded" style={{ height: "550px"}}>
         <Card.Body className='d-flex flex-column justify-content-center align-items-center'>
           <img src={logo} alt="LogoEmpresa" style={{ maxWidth: '50%', maxHeight: '50%', background:'#06aed5', padding: '5px', borderRadius:'50%' }}></img>
-          <Card.Title style ={{marginTop:'10px'}} className='mb-4 text-center'>Iniciar Sesión</Card.Title>
+          <Card.Title style ={{marginTop:'10px'}} className='mb-4 text-center'>EMPRESA IOYNE</Card.Title>
           <Form>
             <Form.Group className="mb-4" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
+              <Form.Label>Correo</Form.Label>
+              <Form.Control type="email" placeholder="Ingrese Correo" />
               <Form.Text className="text-muted">
                 Nunca compartiremos su correo electrónico.
               </Form.Text>
             </Form.Group>
 
             <Form.Group className="mb-4" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
+              <Form.Label>Contraseña</Form.Label>
+              <Form.Control type="password" placeholder="Contraseña" />
             </Form.Group>
 
             <Button className="d-flex justify-content-center" variant="primary" type="submit">
