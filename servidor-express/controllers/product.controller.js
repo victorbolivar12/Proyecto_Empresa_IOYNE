@@ -43,7 +43,7 @@ const createProduct = async (req, res) => {
 // PUT /products/:id
 const updateProduct = async (req, res) => {
   try {
-    await productModule.update(req.body, { where: { idProducto: req.params.id } });
+    await productModule.update(req.body, { where: { id: req.params.id } });
     res.json({
       message: "Producto actualizado con exito",
     });

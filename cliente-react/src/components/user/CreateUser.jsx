@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import { RiUserReceivedFill } from 'react-icons/all'
+import { URL_USER } from '../../endpoint/EndPoint';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { RiUserReceivedFill } from 'react-icons/all'
+import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios'
-import { URL_USER } from '../../endpoint/EndPoint';
 
 
 export const CreateUser = ({handleUpdateUser }) => {

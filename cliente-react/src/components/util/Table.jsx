@@ -34,7 +34,7 @@ export const TableComponent = ({ dataSource, URL, handleUpdateElements, updateCo
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        {keys.map((key) => ( key !== 'id' && 
+                        {keys.map((key) => ( !key.startsWith('id') && 
                             <th key={key}>{key.charAt(0).toUpperCase() + key.slice(1)}</th> // Generar los encabezados de la tabla utilizando las claves
                         ))}
                         <th>Acciones</th>
@@ -43,7 +43,7 @@ export const TableComponent = ({ dataSource, URL, handleUpdateElements, updateCo
                 <tbody>
                     {dataSource.map((element) => (
                         <tr key={element.id}>
-                            {keys.map((key) => ( key !== 'id' && 
+                            {keys.map((key) => (!key.startsWith('id')  && 
                                 <td key={key}>{element[key]}</td> // Acceder a los valores del objeto utilizando las claves
                             ))}
                             <td>

@@ -93,7 +93,6 @@ export const UpdateUser = ({id ,selectUser, show, handleClose, handleUpdateEleme
           <Button variant="danger" onClick={handleClose}>Cerrar</Button>
           <Button onClick = {handleSubmit} variant="primary" >Guardar Cambios</Button>
         </Modal.Footer>
-
       </Modal>
     </>
   )

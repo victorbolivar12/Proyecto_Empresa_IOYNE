@@ -4,6 +4,7 @@ import db from './database/db.js'
 import usersRoutes from './routes/routes.js'
 import authRoutes from "./routes/auth.routes.js";
 import productRoutes from './routes/product.routes.js'
+import custumerRoutes from './routes/costumer.routes.js'
 
 const app = express()
 const port = 5000
@@ -20,6 +21,11 @@ app.use('/product',productRoutes)
 // Agrega las rutas de autenticación
 app.use("/auth", authRoutes);
 
+// Agrega las rutas de  clientes
+app.use('/costumer',custumerRoutes)
+
+
+//Define la coneccion a la base de datos
 try {
   await db.authenticate()
   console.log('Connecion exitosa a la base de datos');

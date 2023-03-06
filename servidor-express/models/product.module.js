@@ -4,7 +4,7 @@ import db from "./../database/db.js";
 const productModule = db.define(
     "products",
     {
-      idProducto: {
+      id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,

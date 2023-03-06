@@ -7,6 +7,7 @@ import { CreateUser } from "./CreateUser";
 import { URL_USER } from "../../endpoint/EndPoint";
 import { TableComponent } from "../util/Table";
 import { UpdateUser } from "./UpdateUser";
+import { Card } from "../util/Card";
 
 export const ListUsers = () => {
 
@@ -22,25 +23,26 @@ export const ListUsers = () => {
     setUsers(res.data)
   }
 
-
   return (
-    <Container>
-      <div style={{ display: 'flex',justifyContent:'space-between', marginBottom:'20px'}}>
-          <h1 style={{fontSize:'30px'}}>Lista de Usuarios</h1>
-          <CreateUser handleUpdateUser={getUsers}/>
-      </div>
-      <Row>
-        <Col>
-            <TableComponent 
-              dataSource={users}
-              URL = {URL_USER}
-              handleUpdateElements = {getUsers}
-              updateComponent={(id,selectUser, show, handleClose, handleUpdateElements) => (
-                <UpdateUser id = {id} selectUser={selectUser} show={show} handleClose={handleClose} handleUpdateElements= {handleUpdateElements}/>
-              )}
-            />
-        </Col>
-      </Row>
-    </Container>
+    <Card
+      title='Lista de usuarios'
+      createComponent={<CreateUser handleUpdateUser={getUsers}/>}
+      tableComponent = { 
+        <TableComponent 
+            dataSource = {users} 
+            URL={URL_USER}
+            handleUpdateElements={getUsers}
+            updateComponent={(id,selectUser, show, handleClose, handleUpdateElements) => (
+                <UpdateUser 
+                  id = {id}
+                  selectUser={selectUser}
+                  show={show} 
+                  handleClose={handleClose} 
+                  handleUpdateElements= {handleUpdateElements}
+                />
+            )}
+        />
+    }
+    />
   )
 }
