@@ -2,7 +2,11 @@ import './style.css'
 import logo from './../../assets/logoo.png'
 import { MdDashboard, FaUsers, IoIosCard, AiTwotoneSetting, MdOutlineSupervisedUserCircle, FaReadme, RiLogoutBoxFill } from 'react-icons/all'
 import { ListUsers } from '../../components/user/ListUsers'
-
+import { ListClient } from '../../components/client/ListClient'
+import { ListProducts } from './../../components/products/ListProducts'
+import { ListQuotes } from './../../components/quotes/ListQuotes'
+import { Setting } from './../../components/setting/Setting'
+import { Link, Route, Routes } from "react-router-dom";
 
 export const Dashboard = () => {
 
@@ -10,13 +14,13 @@ export const Dashboard = () => {
   let CurrentDate = new Date().toLocaleDateString('es-ES', options);
 
   // const menuLinks = [
-  //   {title: 'Dashboard', path: '/', icon: MdDashboard },
-  //   {title: 'Usuarios', path: '/usuarios', icon: FaUsers },
-  //   {title: 'Productos', path: '/productos', icon: IoIosCard },
-  //   {title: 'Cotizaciones', path: '/cotizaciones', icon: AiTwotoneSetting },
-  //   {title: 'Clientes', path: '/clientes', icon: MdOutlineSupervisedUserCircle },
-  //   {title: 'Configuracion', path: '/configuracion', icon: FaReadme },
-  //   {title: 'Cerrar Seccion', path: '/logout', icon: RiLogoutBoxFill }
+  //   { title: 'Dashboard', path: '/dashboard', icon: MdDashboard, component: Dashboard },
+  //   { title: 'Usuarios', path: '/dashboard/usuarios', icon: FaUsers, component: ListUsers },
+  //   { title: 'Productos', path: '/dashboard/productos', icon: IoIosCard, component: ListProducts },
+  //   { title: 'Cotizaciones', path: '/dashboard/cotizaciones', icon: FaReadme, component: ListQuotes },
+  //   { title: 'Clientes', path: '/dashboard/clientes', icon: MdOutlineSupervisedUserCircle, component: ListClient },
+  //   { title: 'Configuracion', path: '/dashboard/configuracion', icon: AiTwotoneSetting, component: Setting },
+  //   { title: 'Cerrar Seccion', path: '/dashboard/logout', icon: RiLogoutBoxFill }
   // ]
 
   return (
@@ -46,7 +50,7 @@ export const Dashboard = () => {
 
       {/* ---Main Dashboard--- */}
       <main>
-        <ListUsers />
+        <ListClient/>
       </main>
     </div>
   )

@@ -6,11 +6,10 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios'
+import { URL_USER } from '../../endpoint/EndPoint';
 
 
-const URI = 'http://localhost:5000/users/'
-
-export const CreateUser = () => {
+export const CreateUser = ({handleUpdateUser }) => {
 
   const [show, setShow] = useState(false);
   const [dataUser, setDataUser] = useState({
@@ -34,7 +33,8 @@ export const CreateUser = () => {
   const handleSubmit = async () =>{
     setShow(false);
     console.log(dataUser);
-    await axios.post(URI,dataUser)
+    await axios.post(URL_USER,dataUser)
+    handleUpdateUser()
   }
 
   return (

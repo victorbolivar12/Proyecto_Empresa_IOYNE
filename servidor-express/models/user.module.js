@@ -33,6 +33,10 @@ const UserModule = db.define(
   }
 );
 
+UserModule.prototype.validPassword = async function (password) {
+  return this.password === password;
+};
+
 // Sincroniza el modelo con la base de datos
 UserModule.sync({ force: false })
   .then(() => {
@@ -44,5 +48,7 @@ UserModule.sync({ force: false })
       error
     );
   });
+
+
 
 export default UserModule;

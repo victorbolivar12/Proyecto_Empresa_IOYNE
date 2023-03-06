@@ -1,22 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import { AiFillEdit } from 'react-icons/all';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { URL_USER } from '../../endpoint/EndPoint';
+import axios from 'axios'
 
+export const UpdateUser = ({id ,selectUser, show, handleClose, handleUpdateElements }) => {
 
-export const UpdateUser = () => {
+  const [updateUser, setUpdateUser] = useState({
+    username: selectUser.username,
+    password: selectUser.password,
+    email: selectUser.email,
+    rol: selectUser.rol
+  });
 
-  const [show, setShow] = useState(false);
+  const handleInputChange = (e) =>{
+    const target = e.target
+    const value = target.value;
+    const name = target.name
+    setUpdateUser({...updateUser, [name]: value })
+  }
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleSubmit = async () =>{
+    await axios.put(URL_USER+id,updateUser)
+    handleUpdateElements()
+    handleClose()
+  }
 
   return (
     <>
-      <Button variant='primary' onClick={handleShow} style={{ border: 'none' }}><AiFillEdit style={{ marginRight: "10px" }} /></Button>
 
       <Modal size="lg" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -30,8 +44,9 @@ export const UpdateUser = () => {
                 <Form.Label>Usuario</Form.Label>
                 <Form.Control
                   type='texto'
-                  placeholder='usuario'
-                  name='name'
+                  name='username'
+                  placeholder = {selectUser.username}
+                  onChange = {handleInputChange}
                 />
               </Form.Group>
 
@@ -39,8 +54,9 @@ export const UpdateUser = () => {
                 <Form.Label>Contraseña</Form.Label>
                 <Form.Control
                   type='password'
-                  placeholder='contraseña'
                   name='password'
+                  placeholder= {selectUser.password}
+                  onChange = {handleInputChange}
                 />
               </Form.Group>
             </Row>
@@ -50,16 +66,22 @@ export const UpdateUser = () => {
                 <Form.Label>Correo</Form.Label>
                 <Form.Control
                   type='email'
-                  placeholder='correo'
                   name='email'
+                  placeholder = {selectUser.email}
+                  onChange = {handleInputChange}
                 />
               </Form.Group>
 
               <Form.Group as={Col} controlId='formRol'>
                 <Form.Label>Rol</Form.Label>
-                <Form.Select aria-label="Default select example">
-                  <option>Admin</option>
-                  <option value="1">Gestor</option>
+                <Form.Select 
+                  aria-label="Default select example"
+                  name = 'rol'
+                  onChange = {handleInputChange}
+                >
+                  <option>Abrir menú de selección</option>
+                  <option value = "Admin">Admin</option>
+                  <option value= "Gestor">Gestor</option>
                 </Form.Select>
               </Form.Group>
             </Row>
@@ -69,7 +91,7 @@ export const UpdateUser = () => {
 
         <Modal.Footer>
           <Button variant="danger" onClick={handleClose}>Cerrar</Button>
-          <Button variant="primary" onClick={handleClose}>Guardar Cambios</Button>
+          <Button onClick = {handleSubmit} variant="primary" >Guardar Cambios</Button>
         </Modal.Footer>
 
       </Modal>

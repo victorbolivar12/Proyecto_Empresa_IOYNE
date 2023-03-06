@@ -1,16 +1,38 @@
 import React, { useState } from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
 import logo from './../assets/Logoo.png'
+import { useNavigate } from 'react-router-dom';
+import { URL_AUTH } from '../endpoint/EndPoint';
+import axios from 'axios'
 
 export const Login = () => {
+  
+  const navigate = useNavigate();
+  const [authError,setAuthError] = useState(false);
+  const [dataLogin, setDataLogin] = useState({
+    email:'',
+    password: ''
+  });
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const handleInputChange = (e) =>{
+    const target = e.target
+    const value = target.value;
+    const name = target.name
 
-  const handleSubmit = (event) => {
+    setDataLogin({...dataLogin, [name]: value })
+  }
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Aquí puedes enviar los datos del formulario a un servidor o realizar otras acciones
+    console.log(dataLogin);
+    try {
+      await axios.post(URL_AUTH,dataLogin)
+      navigate('/dashboard')
+    } catch (error) {
+      setAuthError(true)
+    }
   };
+
 
   return (
     <>
@@ -21,7 +43,12 @@ export const Login = () => {
           <Form>
             <Form.Group className="mb-4" controlId="formBasicEmail">
               <Form.Label>Correo</Form.Label>
-              <Form.Control type="email" placeholder="Ingrese Correo" />
+              <Form.Control 
+                type="email" 
+                placeholder="Ingrese Correo" 
+                name = 'email'
+                onChange={handleInputChange}
+              />
               <Form.Text className="text-muted">
                 Nunca compartiremos su correo electrónico.
               </Form.Text>
@@ -29,12 +56,19 @@ export const Login = () => {
 
             <Form.Group className="mb-4" controlId="formBasicPassword">
               <Form.Label>Contraseña</Form.Label>
-              <Form.Control type="password" placeholder="Contraseña" />
+              <Form.Control 
+                type="password"
+                placeholder="Contraseña"
+                name = 'password'
+                onChange={handleInputChange}  
+              />
+
             </Form.Group>
 
-            <Button className="d-flex justify-content-center" variant="primary" type="submit">
+            <Button onClick={handleSubmit} className="d-flex justify-content-center" variant="primary" type="submit">
               Iniciar Seccion
             </Button>
+            {authError && <p style={{marginTop:'10px', color:'red'}}>CREDENCIALES INCORRECTAS</p>}
           </Form>
         </Card.Body>
       </Card>
