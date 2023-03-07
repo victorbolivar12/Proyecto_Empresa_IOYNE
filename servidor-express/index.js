@@ -5,6 +5,7 @@ import usersRoutes from './routes/routes.js'
 import authRoutes from "./routes/auth.routes.js";
 import productRoutes from './routes/product.routes.js'
 import custumerRoutes from './routes/costumer.routes.js'
+// import quoteRoutes from './routes/quote.routes.js'
 
 const app = express()
 const port = 5000
@@ -19,11 +20,13 @@ app.use('/users',usersRoutes)
 app.use('/product',productRoutes)
 
 // Agrega las rutas de autenticación
-app.use("/auth", authRoutes);
+app.use("/auth", authRoutes)
 
 // Agrega las rutas de  clientes
 app.use('/costumer',custumerRoutes)
-
+ 
+//Agrega las rutas de las cotizaciones 
+//app.use('/quote',quoteRoutes)
 
 //Define la coneccion a la base de datos
 try {

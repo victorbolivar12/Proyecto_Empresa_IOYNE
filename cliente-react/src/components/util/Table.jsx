@@ -35,9 +35,9 @@ export const TableComponent = ({ dataSource, URL, handleUpdateElements, updateCo
                 <thead>
                     <tr>
                         {keys.map((key) => ( !key.startsWith('id') && 
-                            <th key={key}>{key.charAt(0).toUpperCase() + key.slice(1)}</th> // Generar los encabezados de la tabla utilizando las claves
+                            <th key={key} style={{background:'#116b89', color:'white'}}>{key.charAt(0).toUpperCase() + key.slice(1)}</th> // Generar los encabezados de la tabla utilizando las claves
                         ))}
-                        <th>Acciones</th>
+                        <th style={{background:'#116b89', color:'white'}}>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>

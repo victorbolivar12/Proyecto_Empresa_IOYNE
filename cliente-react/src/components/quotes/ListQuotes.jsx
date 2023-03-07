@@ -1,7 +1,11 @@
+import {Card} from './../util/Card'
+
 export const ListQuotes = () => {
     return(
         <>
-            Quotes components
+            <Card 
+                title= 'Lista de cotizaciones'
+            />
         </>
 
     )

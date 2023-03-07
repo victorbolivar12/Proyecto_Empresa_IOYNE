@@ -8,26 +8,32 @@ import { Link, Route, Routes } from "react-router-dom";
 import { Home } from '../../components/home/Home'
 import logo from './../../assets/logoo.png'
 import './style.css'
+
 export const Dashboard = () => {
+
+  const user = {
+    name:'Victor',
+    rol:'Admin'
+  }
 
   let options = { day: 'numeric', month: 'long', year: 'numeric' }
   let CurrentDate = new Date().toLocaleDateString('es-ES', options);
 
   const menuLinks = [
-    { title: 'Dashboard', path: 'home', icon: MdDashboard, component: Home },
-    { title: 'Usuarios', path: 'usuarios', icon: FaUsers, component: ListUsers },
+    { title: 'Dashboard', path: '*', icon: MdDashboard, component: Home },
     { title: 'Productos', path: 'productos', icon: IoIosCard, component: ListProducts },
     { title: 'Cotizaciones', path: 'cotizaciones', icon: FaReadme, component: ListQuotes },
     { title: 'Clientes', path: 'clientes', icon: MdOutlineSupervisedUserCircle, component: ListCostumer },
     { title: 'Configuracion', path: 'configuracion', icon: AiTwotoneSetting, component: Setting },
-    { title: 'Cerrar Seccion', path: 'logout', icon: RiLogoutBoxFill }
+    { title: 'Cerrar Seccion', path: '/', icon: RiLogoutBoxFill }
   ]
 
   return (
 
     <div className="page">
       {/* ---Header Dashboard--- */}
-      <header>Dashboard
+      <header>
+        <h1 style={{fontSize:'18px', color:'#116b89', fontWeight:'600'}}>BIENVENIDO AL PANEL DE CONTROL {user.name.toUpperCase()}</h1>
         <p>{CurrentDate}</p>
       </header>
 
@@ -38,6 +44,7 @@ export const Dashboard = () => {
           <span>Empresa IOYNE</span>
         </div>
         <ul className='list_dashboard'>
+          {user.rol == 'Admin' && <Link to='usuarios'><li><a><FaUsers/>Usuarios</a></li></Link>}
           {
             menuLinks.map((link)=>{
               return(
@@ -45,13 +52,6 @@ export const Dashboard = () => {
               )
             })
           }
-          {/* <li><a><MdDashboard />Dashboard</a></li>
-          <Link to='users'><li><a><FaUsers />Usuarios</a></li></Link>
-          <Link to='product'><li><a><FaReadme />Productos</a></li></Link>
-          <li><a><IoIosCard />Cotizaciones</a></li>
-          <li><a><MdOutlineSupervisedUserCircle />Clientes</a></li>
-          <li><a><AiTwotoneSetting />Configuracion</a></li>
-          <li><a><RiLogoutBoxFill />Cerrar Seccion</a></li> */}
         </ul>
       </aside>
 
@@ -65,10 +65,8 @@ export const Dashboard = () => {
               )
             })
           }
-          <Route path='*' element='not Fount'/>
-          {/* <Route path='/usuarios' element={<ListUsers/>} />
-          <Route path='/productos' element={<ListProducts/>} /> */}
-          
+          <Route path='/usuarios' element={<ListUsers/>}/>
+          <Route path='*' element={<Home/>}/>
         </Routes>
       </main>
     </div>

@@ -6,8 +6,9 @@ import { URL_AUTH } from '../endpoint/EndPoint';
 import axios from 'axios'
 
 export const Login = () => {
-  
+
   const navigate = useNavigate();
+  const [intentos,setIntentos] = useState(0)
   const [authError,setAuthError] = useState(false);
   const [dataLogin, setDataLogin] = useState({
     email:'',
@@ -27,16 +28,17 @@ export const Login = () => {
     console.log(dataLogin);
     try {
       await axios.post(URL_AUTH,dataLogin)
-      navigate('/dashboard')
+      navigate('/dashboard/*')
     } catch (error) {
       setAuthError(true)
+      setIntentos(intentos+1)
     }
   };
 
 
   return (
     <>
-      <Card className="w-25 mx-auto mt-5 shadow p-3 mb-5 bg-body rounded" style={{ height: "550px"}}>
+      <Card className="w-25 mx-auto mt-5 shadow p-3 mb-5 bg-body rounded" style={{ height: "600px"}}>
         <Card.Body className='d-flex flex-column justify-content-center align-items-center'>
           <img src={logo} alt="LogoEmpresa" style={{ maxWidth: '50%', maxHeight: '50%', background:'#06aed5', padding: '5px', borderRadius:'50%' }}></img>
           <Card.Title style ={{marginTop:'10px'}} className='mb-4 text-center'>EMPRESA IOYNE</Card.Title>
@@ -68,7 +70,8 @@ export const Login = () => {
             <Button onClick={handleSubmit} className="d-flex justify-content-center" variant="primary" type="submit">
               Iniciar Seccion
             </Button>
-            {authError && <p style={{marginTop:'10px', color:'red'}}>CREDENCIALES INCORRECTAS</p>}
+            {authError && <p style={{marginTop:'10px', color:'red', textAlign:'center'}}>Credenciales Incorrectas, Intentos:{intentos}</p>}
+            {intentos >= 3 && <p style={{marginTop:'10px', color:'red', textAlign:'center'}}>Usuario bloqueado</p>}
           </Form>
         </Card.Body>
       </Card>
