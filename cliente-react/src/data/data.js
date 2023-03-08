@@ -4,12 +4,12 @@ export const qoutes = [
         date: '2023-03-01',
         total: 50,
         userId: {
-            username:'victorbolivar12',
-            correo: 'victorandres.bolivar@gmail.com'
+            username:'Victor',
+            correo: 'victor@example.com'
         },
         costumerId:{
-            nombre:'Alvaro',
-            correo: 'alvaro@gmail.com'
+            nombre:'Juan',
+            correo: 'juan.perez@example.com'
         },
         productos:[
             {nombre:'producto1', precio: 50, detalle:'detalle del producto 1', cantidad: 2},
@@ -26,8 +26,8 @@ export const qoutes = [
             correo: 'admin@admin.com'
         },
         costumerId:{
-            nombre:'Elizabet',
-            correo: 'Elizabet@gmail.com'
+            nombre:'María',
+            correo: 'maria.garcia@example.com'
         },
         productos:[
             {nombre:'producto1', precio: 50, detalle:'detalle del producto 1', cantidad: 3},
