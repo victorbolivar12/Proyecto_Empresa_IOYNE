@@ -6,6 +6,7 @@ import { qoutes } from './../../data/data'
 import Table from 'react-bootstrap/Table'
 import { Card } from './../util/Card'
 import axios from 'axios'
+import { CreateQuotes } from './CreateQuote'
 
 
 const TableQoutes = ({ data }) => {
@@ -65,6 +66,7 @@ export const ListQuotes = () => {
         <>
             <Card
                 title='Lista de cotizaciones'
+                createComponent = {<CreateQuotes/>}
                 tableComponent={<TableQoutes data={qoutes} />}
             />
         </>

@@ -11,7 +11,7 @@ import{
 export const sendMail = async (req, res) => {
   const { id } = req.params;
 
-  const quoteSelected = qoutes[id];
+  const quoteSelected = qoutes[id-1];
   
   console.log(quoteSelected);
 
