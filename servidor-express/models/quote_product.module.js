@@ -1,9 +1,9 @@
-import Quote from "./quote.module.js";
 import { DataTypes } from "sequelize";
 import db from "./../database/db.js";
 import productModule from "./product.module.js";
+import quoteModel from "./quote.module.js";
 
-const QuoteProduct = db.define(
+const quoteProductModel = db.define(
   "quotes_products",
   {
     id: {
@@ -12,7 +12,7 @@ const QuoteProduct = db.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    quantity: {
+    cantidad: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -24,13 +24,13 @@ const QuoteProduct = db.define(
 );
 
 // Relación con Quote
-QuoteProduct.belongsTo(Quote, { foreignKey: { name: "quoteId", allowNull: false } });
+quoteProductModel.belongsTo(quoteModel, { foreignKey: { name: "quoteId", allowNull: false } });
 
 // Relación con ProductModule
-QuoteProduct.belongsTo(productModule, { foreignKey: { name: "productId", allowNull: false } });
+quoteProductModel.belongsTo(productModule, { foreignKey: { name: "idProduct", allowNull: false } });
 
 // Sincroniza el modelo con la base de datos
-QuoteProduct.sync({ force: false })
+quoteProductModel.sync({ force: false })
   .then(() => {
     console.log('Tabla "quotes_products" creada en la base de datos');
   })
@@ -41,4 +41,4 @@ QuoteProduct.sync({ force: false })
     );
   });
 
-export default QuoteProduct;
+export default quoteProductModel;

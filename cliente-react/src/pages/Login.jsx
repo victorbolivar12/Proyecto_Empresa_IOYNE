@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { AuthContext } from './../application/AuthContext';
+import { useContext, useState } from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
 import logo from './../assets/Logoo.png'
 import { useNavigate } from 'react-router-dom';
@@ -7,9 +8,11 @@ import axios from 'axios'
 
 export const Login = () => {
 
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   const [intentos,setIntentos] = useState(0)
   const [authError,setAuthError] = useState(false);
+  
   const [dataLogin, setDataLogin] = useState({
     email:'',
     password: ''
@@ -25,14 +28,16 @@ export const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(dataLogin);
     try {
-      await axios.post(URL_AUTH,dataLogin)
+      const user = await axios.post(URL_AUTH,dataLogin)
+      login(user.data.user)
+      console.log(user.data.user);
       navigate('/dashboard/*')
     } catch (error) {
       setAuthError(true)
       setIntentos(intentos+1)
     }
+    
   };
 
 

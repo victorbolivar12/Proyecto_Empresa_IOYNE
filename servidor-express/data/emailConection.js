@@ -1,0 +1,5 @@
+export const user = 'victorandres.bolivar@gmail.com'
+export const pass = 'bqfyyojbqwynfmwe'
+export const from = 'ortizmoncada02@gmail.com'
+export const to = 'ortizmoncada02@gmail.com'
+export const subject = 'Cotizacion | EMPRESA IOYNE'

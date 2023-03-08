@@ -1,29 +1,29 @@
-import Quote from "../models/quote.module.js";
-import QuotesProduct from "../models/quote_product.module.js";
-import Customer from "../models/customer.module.js";
-import Product from "../models/product.module.js";
-import User from "../models/user.module.js";
+import quoteModel from "../models/quote.module.js";
+import quoteProductModel from "../models/quote_product.module.js";
+import customerModule from "../models/customer.module.js"
+import productModule from "../models/product.module.js";
+import UserModule from "../models/user.module.js";
 
 
 // Obtener todas las cotizaciones
 export const getQuotes = async (req, res) => {
   try {
-    const quotes = await Quote.findAll({
+    const quotes = await quoteModel.findAll({
       include: [
         {
-          model: Customer,
+          model: customerModule,
           attributes: ["id", "nombre", "apellido", "telefono", "correo"],
         },
         {
-          model: User,
+          model: UserModule,
           attributes: ["id", "username", "email"],
         },
         {
-          model: QuotesProduct,
+          model: quoteProductModel,
           attributes: ["cantidad"],
           include: [
             {
-              model: Product,
+              model: productModule,
               attributes: ["id", "nombre", "precio"],
             },
           ],
@@ -41,23 +41,23 @@ export const getQuotes = async (req, res) => {
 export const getQuoteById = async (req, res) => {
   try {
     const { id } = req.params;
-    const quote = await Quote.findOne({
+    const quote = await quoteModel.findOne({
       where: { id },
       include: [
         {
-          model: Customer,
+          model: customerModule,
           attributes: ["id", "nombre", "apellido", "telefono", "correo"],
         },
         {
-          model: User,
+          model: UserModule,
           attributes: ["id", "username", "email"],
         },
         {
-          model: QuotesProduct,
+          model: quoteProductModel,
           attributes: ["cantidad"],
           include: [
             {
-              model: Product,
+              model: productModule,
               attributes: ["id", "nombre", "precio"],
             },
           ],
@@ -78,20 +78,20 @@ export const getQuoteById = async (req, res) => {
 export const createQuote = async (req, res) => {
   const { customerId, userId, products } = req.body;
   try {
-    const customer = await Customer.findByPk(customerId);
-    const user = await User.findByPk(userId);
+    const customer = await customerModule.findByPk(customerId);
+    const user = await UserModule.findByPk(userId);
     if (!customer || !user) {
       return res
         .status(404)
         .json({ message: "Cliente o usuario no encontrado." });
     }
-    const quote = await Quote.create(
+    const quote = await quoteModel.create(
       {
         customerId,
         userId,
         quotesproducts: products,
       },
-      { include: QuotesProduct }
+      { include: quoteProductModel }
     );
     res.status(201).json({ message: "Cotización creada con éxito.", quote });
   } catch (error) {
@@ -105,12 +105,12 @@ export const updateQuote = async (req, res) => {
   const { id } = req.params;
   const { customerId, userId, products } = req.body;
   try {
-    const quote = await Quote.findOne({ where: { id } });
+    const quote = await quoteModel.findOne({ where: { id } });
     if (!quote) {
       return res.status(404).json({ message: "Cotización no encontrada." });
     }
-    const customer = await Customer.findByPk(customerId);
-    const user = await User.findByPk(userId);
+    const customer = await customerModule.findByPk(customerId);
+    const user = await UserModule.findByPk(userId);
     if (!customer || !user) {
       return res
         .status(404)
@@ -121,11 +121,11 @@ export const updateQuote = async (req, res) => {
     await Promise.all(
       products.map(async (product) => {
         const { id: productId, cantidad } = product;
-        const quoteProduct = await QuotesProduct.findOne({
+        const quoteProduct = await quoteProductModel.findOne({
           where: { quoteId: quote.id, productId },
         });
         if (!quoteProduct) {
-          return await QuotesProduct.create({
+          return await quoteProductModel.create({
             quoteId: quote.id,
             productId,
             cantidad,
@@ -145,7 +145,7 @@ export const updateQuote = async (req, res) => {
 export const deleteQuote = async (req, res) => {
   const { id } = req.params;
   try {
-    const quote = await Quote.findOne({ where: { id } });
+    const quote = await quoteModel.findOne({ where: { id } });
     if (!quote) {
       return res.status(404).json({ message: "Cotización no encontrada." });
     }

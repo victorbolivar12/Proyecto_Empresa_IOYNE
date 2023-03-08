@@ -1,24 +1,26 @@
-import { Card } from "../util/Card"
+import { AuthContext } from './../../application/AuthContext';
+import { URL_USER } from '../../endpoint/EndPoint';
 import Button from "react-bootstrap/esm/Button";
-import { useState } from "react";
 import { FormBody } from "../user/CreateUser";
-
-
+import { useContext, useState } from 'react';
+import { Card } from "../util/Card"
+import axios from 'axios';
 
 export const Setting = () => {
+    const { user } = useContext(AuthContext);
 
-    const [updateUser, setUpdateUser] = useState({
-        id: 1,
-        username: 'victorboli',
-        password: 'contrasenavictor',
-        email: 'correovictor',
-        rol: 'Admin'
-    });
+    const [updateUser, setUpdateUser] = useState(user);
 
-    const onSutmit = () =>{
+    const onSutmit = async () => {
         console.log(updateUser);
+        try {
+            await axios.put(URL_USER + user.id, updateUser);
+            alert('Datos guardados con exito')
+        } catch (error) {
+            alert('Error al guardar los datos')
+        }
         //Enviar los datos nuevos del u
-    } 
+    }
 
     return (
         <>
@@ -28,7 +30,7 @@ export const Setting = () => {
             />
 
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '30px' }}>
-                 <Button onClick={onSutmit} variant="primary">Guardar Cambios</Button>
+                <Button onClick={onSutmit} variant="primary">Guardar Cambios</Button>
             </div>
         </>
 

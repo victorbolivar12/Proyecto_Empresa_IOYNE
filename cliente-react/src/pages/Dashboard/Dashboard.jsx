@@ -8,13 +8,16 @@ import { Link, Route, Routes } from "react-router-dom";
 import { Home } from '../../components/home/Home'
 import logo from './../../assets/logoo.png'
 import './style.css'
+import { AuthContext } from './../../application/AuthContext';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const Dashboard = () => {
 
-  const user = {
-    name:'Victor',
-    rol:'Admin'
-  }
+  const { user } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+ 
 
   let options = { day: 'numeric', month: 'long', year: 'numeric' }
   let CurrentDate = new Date().toLocaleDateString('es-ES', options);
@@ -33,7 +36,7 @@ export const Dashboard = () => {
     <div className="page">
       {/* ---Header Dashboard--- */}
       <header>
-        <h1 style={{fontSize:'18px', color:'#116b89', fontWeight:'600'}}>BIENVENIDO AL PANEL DE CONTROL {user.name.toUpperCase()}</h1>
+        <h1 style={{fontSize:'18px', color:'#116b89', fontWeight:'600'}}>BIENVENIDO AL PANEL DE CONTROL  {user != null ? user.username.toUpperCase(): navigate('/')}</h1>
         <p>{CurrentDate}</p>
       </header>
 
@@ -44,7 +47,11 @@ export const Dashboard = () => {
           <span>Empresa IOYNE</span>
         </div>
         <ul className='list_dashboard'>
-          {user.rol == 'Admin' && <Link to='usuarios'><li><a><FaUsers/>Usuarios</a></li></Link>}
+          {
+            user != null ? (
+              user.rol == 'Admin' && <Link to='usuarios'><li><a><FaUsers/>Usuarios</a></li></Link>
+            ): navigate('/')
+          }
           {
             menuLinks.map((link)=>{
               return(
