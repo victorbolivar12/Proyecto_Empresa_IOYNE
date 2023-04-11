@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import db from "./../database/db.js";
+import { newUsers } from "../data/usersData.js";
 
 const UserModule = db.define(
   "users",
@@ -28,7 +29,7 @@ const UserModule = db.define(
     },
   },
   {
-    tableName: "users",
+    tableName: "usuarios",
     timestamps: false,
   }
 );
@@ -37,17 +38,25 @@ UserModule.prototype.validPassword = async function (password) {
   return this.password === password;
 };
 
-// Sincroniza el modelo con la base de datos
-UserModule.sync({ force: false })
-  .then(() => {
-    console.log('Tabla "users" creada en la base de datos');
-  })
-  .catch((error) => {
-    console.error(
-      'Error al crear la tabla "users" en la base de datos:',
-      error
-    );
-  });
+// // Sincroniza el modelo con la base de datos
+// UserModule.sync({ force: false })
+//   .then(() => {
+//     console.log('Tabla "usuarios" creada en la base de datos');
+//   })
+//   .catch((error) => {
+//     console.error(
+//       'Error al crear la tabla "usuarios" en la base de datos:',
+//       error
+//     );
+//   });
+
+// UserModule.bulkCreate(newUsers)
+//   .then(newUsers => {
+//     console.log('Nuevos usuarios insertados');
+//   })
+//   .catch(error => {
+//     console.error('Error al insertar usuarios:', error);
+//   });
 
 
 

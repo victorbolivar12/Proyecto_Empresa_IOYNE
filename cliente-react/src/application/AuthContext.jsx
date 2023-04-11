@@ -13,7 +13,6 @@ function AuthContextProvider({ children }) {
     setUser(null);
   }
 
-
   const contextValue = {
     user,
     login,

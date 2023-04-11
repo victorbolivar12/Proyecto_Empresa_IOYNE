@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import db from "./../database/db.js";
-import productModule from "./product.module.js";
 import quoteModel from "./quote.module.js";
+import productModule from "./product.module.js";
 
 const quoteProductModel = db.define(
   "quotes_products",
@@ -10,33 +10,55 @@ const quoteProductModel = db.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
     cantidad: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: false
     },
+    id_cotizacion: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "quotes",
+        key: "id"
+      }
+    },
+    id_producto: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "products",
+        key: "id"
+      }
+    }
   },
   {
-    tableName: "quotes_products",
+    tableName: "cotizaciones_productos",
     timestamps: false,
   }
 );
 
-// Relación con Quote
-quoteProductModel.belongsTo(quoteModel, { foreignKey: { name: "quoteId", allowNull: false } });
+quoteModel.belongsToMany(productModule, {
+  through: quoteProductModel,
+  foreignKey: "id_cotizacion",
+  otherKey: "id_producto"
+});
 
-// Relación con ProductModule
-quoteProductModel.belongsTo(productModule, { foreignKey: { name: "idProduct", allowNull: false } });
+productModule.belongsToMany(quoteModel, {
+  through: quoteProductModel,
+  foreignKey: "id_producto",
+  otherKey: "id_cotizacion"
+});
 
 // Sincroniza el modelo con la base de datos
 quoteProductModel.sync({ force: false })
   .then(() => {
-    console.log('Tabla "quotes_products" creada en la base de datos');
+    console.log('Tabla "cotizaciones_productos" creada en la base de datos');
   })
   .catch((error) => {
     console.error(
-      'Error al crear la tabla "quotes_products" en la base de datos:',
+      'Error al crear la tabla "cotizaciones_productos" en la base de datos:',
       error
     );
   });

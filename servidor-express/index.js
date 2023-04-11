@@ -6,7 +6,9 @@ import authRoutes from "./routes/auth.routes.js";
 import productRoutes from './routes/product.routes.js'
 import custumerRoutes from './routes/costumer.routes.js'
 import mailRoutes from './routes/mail.routes.js'
-//import quoteRoutes from './routes/quote.routes.js'
+//import quoteModel from './models/quote.module.js';
+//import quoteProductModel from './models/quote_product.module.js';
+import quoteRoutes from './routes/quote.routes.js'
 
 const app = express()
 const port = 5000
@@ -27,11 +29,10 @@ app.use("/auth", authRoutes)
 app.use('/costumer',custumerRoutes)
  
 //Agrega las rutas de las cotizaciones 
-//app.use('/quote',quoteRoutes)
+app.use('/quote',quoteRoutes)
 
 //agrega las rutas para enviar un correo
 app.use('/send-mail',mailRoutes)
-
 
 //Define la coneccion a la base de datos
 try {

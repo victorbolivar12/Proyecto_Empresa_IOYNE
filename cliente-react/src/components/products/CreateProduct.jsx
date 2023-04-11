@@ -23,7 +23,7 @@ const FormBody = ({ formData, setFormData }) => {
                     <Form.Label>Nombre</Form.Label>
                     <Form.Control
                         type='text'
-                        placeholder='Ingrese el nombre del producto'
+                        //placeholder='Ingrese el nombre del producto'
                         name='nombre'
                         onChange={handleInputChange}
                     />
@@ -33,7 +33,7 @@ const FormBody = ({ formData, setFormData }) => {
                     <Form.Label>Cantidad</Form.Label>
                     <Form.Control
                         type='number'
-                        placeholder='Ingrese el cantidad del producto'
+                        //placeholder='Ingrese el cantidad del producto'
                         name='cantidad'
                         onChange={handleInputChange}
                     />
@@ -45,7 +45,7 @@ const FormBody = ({ formData, setFormData }) => {
                     <Form.Label>Detalle</Form.Label>
                     <Form.Control
                         type='text'
-                        placeholder='Ingrese el detalle del producto'
+                        //placeholder='Ingrese el detalle del producto'
                         name='detalle'
                         onChange={handleInputChange}
                     />
@@ -55,12 +55,22 @@ const FormBody = ({ formData, setFormData }) => {
                     <Form.Label>Precio</Form.Label>
                     <Form.Control
                         type='number'
-                        placeholder='Ingrese la precio del producto'
+                        //placeholder='Ingrese la precio del producto'
                         name='precio'
                         onChange={handleInputChange}
                     />
                 </Form.Group>
             </Row>
+
+            <Form.Group as={Col} controlId='formPrecio'>
+                    <Form.Label>Peso</Form.Label>
+                    <Form.Control
+                        type='number'
+                        //placeholder='Ingrese la precio del producto'
+                        name='peso'
+                        onChange={handleInputChange}
+                    />
+                </Form.Group>
 
         </Form>
     )
@@ -79,7 +89,6 @@ export const CreateProduct = ({handleUpdate}) => {
     const onSutmit = async () =>{
         await axios.post(URL_PRODUCT,formData)
         handleUpdate()
-        console.log(formData);
     }
 
 
