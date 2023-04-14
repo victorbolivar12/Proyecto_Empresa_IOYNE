@@ -57,16 +57,23 @@ Para instalar y configurar la aplicación, sigue los siguientes pasos después d
 1. Clona el repositorio del proyecto desde GitHub con el siguiente comando: <code>git clone https://github.com/victorbolivar12/Proyecto_Empresa_IOYNE.git</code>.
 2. Accede al directorio del proyecto mediante la terminal con el comando <code>cd Proyecto_Empresa_IOYNE</code>.
 
-#### Configuración de Express
+#### CONFIGURACION DE EXPREES
 3. Accede a la carpeta del servidor Express con el comando <code>cd servidor-express</code>.
 4. Instala las dependencias del servidor con el comando <code>npm install</code>.
 5. Inicia el servidor con el comando <code>npm run dev</code>.
 
-#### Configuración de React
+#### CONFIGURACION DE REACT
 En otra terminal,
 6. accede a la carpeta del cliente React con el comando <code>cd cliente-react</code>.
 7. Instala las dependencias del cliente React con el comando <code>npm install</code>.
 8. Inicia el servidor React con el comando <code>npm run dev</code>.
+
+#### CONFIGURACION DE LA BASE DE DATOS
+Crear una nueva base de datos con postgresSQL con el nombre empresa_ioyne.
+Puerto: <code>5432</code>
+Usuario: <code>postgres</code>
+contrasena: <code>Tu contrasena de postgress</code>
+Todos estos datos se modifican en el archivo DataConection.js que se encuentran en el carpeta servidor-express/database/DataConection.js
 
 ### Ejecucion
 Para ejecutar la aplicación, una vez instaladas las dependencias del proyecto, deberás seguir los siguientes pasos: 
