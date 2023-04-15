@@ -63,7 +63,7 @@ export const Dashboard = () => {
       </aside>
 
       {/* ---Main Dashboard--- */}
-      <main>
+      <main className="overflow-auto" style={{ height: '700px' }}>
         <Routes>
           {
             menuLinks.map((link)=>{

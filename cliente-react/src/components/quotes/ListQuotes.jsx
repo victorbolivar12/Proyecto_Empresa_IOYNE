@@ -9,23 +9,19 @@ import { useState, useEffect } from "react";
 import axios from 'axios'
 import { URL_QUOTE } from "../../endpoint/EndPoint";
 import UpdateQuote from './UpdateQuote'
+import ConfirmDelete from '../util/ConfirmDelete'
 
 const TableQoutes = ({ data, updateData }) => {
 
     const [selectedQuote, setSelectedQuote] = useState(null);
+    const [selectDelete, setSelectDelete] = useState(null);
 
     const handleEdit = (id) => {
         setSelectedQuote(id);
     };
 
     const deleteQuote = (id) => {
-        try {
-            axios.delete(URL_QUOTE + id)
-            updateData()
-            alert("Cotizacion Borrada con exito")
-        } catch (error) {
-            alert("Error al borra la cotizacion")
-        }
+        setSelectDelete(id);
     }
 
     const handleSend = (id) => {
@@ -62,10 +58,10 @@ const TableQoutes = ({ data, updateData }) => {
                                     <td>{element.fecha}</td>
                                     <td>{element.user.username}</td>
                                     <td>{element.customer.nombre} {element.customer.apellido}</td>
-                                    <td>{element.products.length}</td>
-                                    <td>{element.descuento}</td>
-                                    <td>{element.subtotal}</td>
-                                    <td>{element.total}</td>
+                                    <td>{element.products.reduce((acc, cur) => acc + cur.quotes_products.cantidad, 0)} </td>
+                                    <td>{parseFloat(element.descuento).toFixed(2)}</td>
+                                    <td>{parseFloat(element.subtotal).toFixed(2)}</td>
+                                    <td>{parseFloat(element.total).toFixed(2)}</td>
                                     <td>
                                         <Button onClick={() => deleteQuote(element.id)} variant="danger"><AiFillDelete /></Button>
                                         <Button onClick={() => handleEdit(element.id)} variant="primary"><BiEditAlt /></Button>
@@ -77,7 +73,8 @@ const TableQoutes = ({ data, updateData }) => {
                     }
                 </tbody>
             </Table>
-            {selectedQuote && <UpdateQuote id={selectedQuote} updateId = {setSelectedQuote} updateData= {updateData}/>}
+            {selectedQuote && <UpdateQuote id={selectedQuote} updateId={setSelectedQuote} updateData={updateData} />}
+            {selectDelete && <ConfirmDelete id={selectDelete} updateId={setSelectDelete} updateData={updateData} url={URL_QUOTE} />}
         </>
     )
 }
@@ -95,14 +92,14 @@ export const ListQuotes = () => {
         setQoutes(response.data)
     }
 
-   
+
 
     return (
         <>
             <Card
                 title='Lista de cotizaciones'
                 createComponent={<CreateQuotes handleUpdate={getQoutes} />}
-                tableComponent={<TableQoutes data={qoutes} updateData={getQoutes}/>}
+                tableComponent={<TableQoutes data={qoutes} updateData={getQoutes} />}
             />
         </>
 

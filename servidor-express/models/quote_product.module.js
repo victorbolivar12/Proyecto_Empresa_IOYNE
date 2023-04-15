@@ -52,15 +52,15 @@ productModule.belongsToMany(quoteModel, {
 });
 
 // Sincroniza el modelo con la base de datos
-quoteProductModel.sync({ force: false })
-  .then(() => {
-    console.log('Tabla "cotizaciones_productos" creada en la base de datos');
-  })
-  .catch((error) => {
-    console.error(
-      'Error al crear la tabla "cotizaciones_productos" en la base de datos:',
-      error
-    );
-  });
+// quoteProductModel.sync({ force: false })
+//   .then(() => {
+//     console.log('Tabla "cotizaciones_productos" creada en la base de datos');
+//   })
+//   .catch((error) => {
+//     console.error(
+//       'Error al crear la tabla "cotizaciones_productos" en la base de datos:',
+//       error
+//     );
+//   });
 
 export default quoteProductModel;

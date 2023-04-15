@@ -55,17 +55,17 @@ quoteModel.belongsTo(customerModule, {
 
 
 // Sincroniza el modelo con la base de datos
-quoteModel
-  .sync({ force: false })
-  .then(() => {
-    console.log('Tabla "cotizaciones" creada en la base de datos');
-  })
-  .catch((error) => {
-    console.error(
-      'Error al crear la tabla "cotizaciones" en la base de datos:',
-      error
-    );
-  });
+// quoteModel
+//   .sync({ force: false })
+//   .then(() => {
+//     console.log('Tabla "cotizaciones" creada en la base de datos');
+//   })
+//   .catch((error) => {
+//     console.error(
+//       'Error al crear la tabla "cotizaciones" en la base de datos:',
+//       error
+//     );
+//   });
 
 // // Define un array de objetos que representan los registros que deseas insertar
 // const newQuotes = [

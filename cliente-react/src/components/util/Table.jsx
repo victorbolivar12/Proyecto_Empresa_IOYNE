@@ -3,17 +3,20 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button'
 import { AiFillDelete, BiEditAlt } from 'react-icons/all'
 import { useState } from 'react';
+import ConfirmDelete from './ConfirmDelete';
+
 
 export const TableComponent = ({ dataSource, URL, handleUpdateElements, updateComponent }) => {
 
     const [selectUser, setSelectUser] = useState({})
+    const [selectDelete, setSelectDelete] = useState(null);
     const [idUser, setIdtUser] = useState(null)
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const keys = dataSource.length > 0 ? Object.keys(dataSource[0]) : [];
 
-    const deleteElement = async (id) => {
-        await axios.delete(`${URL}${id}`)
-        handleUpdateElements()
+
+    const deleteElement = (id) => {
+        setSelectDelete(id);
     }
 
     const handleUpdateClick = (id) => {
@@ -54,7 +57,7 @@ export const TableComponent = ({ dataSource, URL, handleUpdateElements, updateCo
                     ))}
                 </tbody>
             </Table>
-
+            {selectDelete && <ConfirmDelete id={selectDelete} updateId = {setSelectDelete} updateData= {handleUpdateElements} url={URL}/>}
             {selectUser && updateComponent(idUser,selectUser,showUpdateModal,handleClose,handleUpdateElements)}
         </>
     )
