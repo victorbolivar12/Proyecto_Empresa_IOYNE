@@ -65,11 +65,11 @@ export const createQuote = async (req, res) => {
         productos.map(async (producto) => {
           const product = await productModule.findByPk(producto.id);
           if (!product) {
-            throw new Error(`El producto con id ${producto.id} no existe`);
+            throw new Error(`The product with id ${producto.id} does not exist`);
           }
           if (product.cantidad < producto.cantidad) {
             throw new Error(
-              `No hay suficientes unidades del producto con id ${producto.id}`
+              `There are not enough units of the product with id ${producto.id}`
             );
           }
           product.cantidad -= producto.cantidad;
@@ -102,13 +102,13 @@ export const getQuotes = async (req, res) => {
         },
         {
           model: customerModule,
-          attributes: ["id", "nombre", "apellido", "correo"],
+          attributes: ["id", "name", "lastname", "email"],
         },
         {
           model: productModule,
-          attributes: ["id", "nombre", "precio"],
+          attributes: ["id", "name", "price"],
           through: {
-            attributes: ["cantidad"],
+            attributes: ["count"],
           },
         },
       ],
@@ -116,7 +116,7 @@ export const getQuotes = async (req, res) => {
     res.json(quotes);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Error al obtener las cotizaciones" });
+    res.status(500).json({ message: "Error getting the quote" });
   }
 };
 
@@ -133,24 +133,24 @@ export const getQuoteById = async (req, res) => {
         },
         {
           model: customerModule,
-          attributes: ["id", "nombre", "apellido", "correo"],
+          attributes: ["id", "name", "lastname", "email"],
         },
         {
           model: productModule,
-          attributes: ["id", "nombre", "precio"],
+          attributes: ["id", "name", "price"],
           through: {
-            attributes: ["cantidad"],
+            attributes: ["count"],
           },
         },
       ],
     });
     if (!quote) {
-      return res.status(404).json({ message: "Cotización no encontrada." });
+      return res.status(404).json({ message: "Quotation not found." });
     }
     res.status(200).json(quote);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Error al obtener la cotización." });
+    res.status(500).json({ message: "Error getting the quote." });
   }
 };
 

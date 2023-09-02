@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
-import db from "./../database/db.js";
 import quoteModel from "./quote.module.js";
 import productModule from "./product.module.js";
+import db from "../db.js";
 
 const quoteProductModel = db.define(
   "quotes_products",
@@ -12,11 +12,11 @@ const quoteProductModel = db.define(
       primaryKey: true,
       autoIncrement: true
     },
-    cantidad: {
+    amount: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    id_cotizacion: {
+    quote_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
@@ -24,7 +24,7 @@ const quoteProductModel = db.define(
         key: "id"
       }
     },
-    id_producto: {
+    id_product: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
@@ -34,33 +34,23 @@ const quoteProductModel = db.define(
     }
   },
   {
-    tableName: "cotizaciones_productos",
+    tableName: "quotes_products",
     timestamps: false,
   }
 );
 
 quoteModel.belongsToMany(productModule, {
   through: quoteProductModel,
-  foreignKey: "id_cotizacion",
-  otherKey: "id_producto"
+  foreignKey: "quote_id",
+  otherKey: "product_id"
 });
 
 productModule.belongsToMany(quoteModel, {
   through: quoteProductModel,
-  foreignKey: "id_producto",
-  otherKey: "id_cotizacion"
+  foreignKey: "product_id",
+  otherKey: "quote_id"
 });
 
-// Sincroniza el modelo con la base de datos
-// quoteProductModel.sync({ force: false })
-//   .then(() => {
-//     console.log('Tabla "cotizaciones_productos" creada en la base de datos');
-//   })
-//   .catch((error) => {
-//     console.error(
-//       'Error al crear la tabla "cotizaciones_productos" en la base de datos:',
-//       error
-//     );
-//   });
+
 
 export default quoteProductModel;
