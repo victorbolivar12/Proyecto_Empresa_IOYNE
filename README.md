@@ -79,3 +79,6 @@ HOST = localhost
 JWT_SECRET = secret
 </code>
 
+![diagram](https://github.com/victorbolivar12/Proyecto_Empresa_IOYNE/blob/main/cliente-react/src/assets/IOYNE%20COMPANY.png)
+
+
