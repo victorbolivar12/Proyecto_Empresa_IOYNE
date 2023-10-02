@@ -1,4 +1,4 @@
-# EMPRESA IOYNE
+# COMPANY IOYNE
 <p align="center">
   <img src="https://github.com/victorbolivar12/Proyecto_Empresa_IOYNE/blob/main/cliente-react/src/assets/Logoo.png" width="400" height="400">
 </p>
